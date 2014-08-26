@@ -5,6 +5,7 @@ A simple Ruby Gem to verify MRZ codes on passports. Useful if you need to meet K
 
 Examples
 ------
+The code
 
 ```ruby
 Verified.check("P<GBRLAST<<FIRST<MIDDLE<LION<<<<<<<<<<<<<<<<", "1234567897GBR0001018M1001015<<<<<<<<<<<<<<00")
@@ -15,6 +16,8 @@ would return
 ```ruby
 true
 ```
+
+The code
 
 ```ruby
 Verified.check("P<GBRLAST<<FIRST<MIDDLE<LION<<<<<<<<<<<<<<<<", "1234567897GBR0001018M1001015<<<<<<<<<<<<<<00", true)
