@@ -4,7 +4,7 @@ require 'verified'
 class VerifiedTest < Test::Unit::TestCase
   def test_verified_check_valid_data
     tesh_hash = Hash.new
-    test_hash = {"IssuingState"=>"GBR", "LastName"=>"LAST", "FirstNames"=>["FIRST", "MIDDLE", "LION"], "Number"=>"123456789", "Nationality"=>"GBR", "DateOfBirth"=>"000101", "Gender"=>"M", "ExpiryDate"=>"100101", "PersonalNumber"=>"<<<<<<<<<<<<<<"}
+    test_hash = {"IssuingState"=>"GBR", "LastName"=>"LAST", "FirstNames"=>["FIRST", "MIDDLE", "LION"], "Number"=>"123456789", "Nationality"=>"GBR", "DateOfBirth"=>Date.parse("2000-01-01"), "Gender"=>"M", "ExpiryDate"=>Date.parse("2010-01-01"), "PersonalNumber"=>""}
     passport = Verified::Passport.new("P<GBRLAST<<FIRST<MIDDLE<LION<<<<<<<<<<<<<<<<", "1234567897GBR0001018M1001015<<<<<<<<<<<<<<00")
     test_hash.each do |key, value|
       assert_equal test_hash[key],
@@ -14,7 +14,7 @@ class VerifiedTest < Test::Unit::TestCase
 
   def test_verified_check_valid_data_chevron
     tesh_hash = Hash.new
-    test_hash = {"IssuingState"=>"GBR", "LastName"=>"LAST", "FirstNames"=>["FIRST", "MIDDLE", "LION"], "Number"=>"123456789", "Nationality"=>"GBR", "DateOfBirth"=>"000101", "Gender"=>"M", "ExpiryDate"=>"100101", "PersonalNumber"=>"<<<<<<<<<<<<<<"}
+    test_hash = {"IssuingState"=>"GBR", "LastName"=>"LAST", "FirstNames"=>["FIRST", "MIDDLE", "LION"], "Number"=>"123456789", "Nationality"=>"GBR", "DateOfBirth"=>Date.parse("2000-01-01"), "Gender"=>"M", "ExpiryDate"=>Date.parse("2010-01-01"), "PersonalNumber"=>""}
     passport = Verified::Passport.new("P<GBRLAST<<FIRST<MIDDLE<LION<<<<<<<<<<<<<<<<", "1234567897GBR0001018M1001015<<<<<<<<<<<<<<00")
     test_hash.each do |key, value|
       assert_equal test_hash[key],

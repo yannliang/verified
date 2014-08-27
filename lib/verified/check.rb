@@ -2,22 +2,23 @@ class Check
   def check(mrz_line_1, mrz_line_2)
     #make a new digit checker
     @@digit_checker = CheckDigit.new
+    @@date_converter = YYDate.new
     #string manipulation to simply reading the first line
-    split = mrz_line_1.gsub(/<+/, '<').split('<')
+    split = mrz_line_1.split(/<+/)
     #get data unformatted from passport
     doc_data = Hash.new(9)
     #first line of MRZ
-    doc_data["IssuingState"] = mrz_line_1[2...5]
+    doc_data["IssuingState"] = mrz_line_1[2...5].sub(/<+/, '')
     doc_data["LastName"] = split[1][3..-1]
     doc_data["FirstNames"] = split[2..-1]
 
     #second line of MRZ
     doc_data["Number"] = mrz_line_2[0...9]
-    doc_data["Nationality"] = mrz_line_2[10...13]
-    doc_data["DateOfBirth"] = mrz_line_2[13...19]
-    doc_data["Gender"] = mrz_line_2[20]
-    doc_data["ExpiryDate"] = mrz_line_2[21...27]
-    doc_data["PersonalNumber"] = mrz_line_2[28...42]
+    doc_data["Nationality"] = mrz_line_2[10...13].sub(/<+/, '')
+    doc_data["DateOfBirth"] = @@date_converter.convert_to_date(mrz_line_2[13...19])
+    doc_data["Gender"] = mrz_line_2[20].sub(/<+/, '')
+    doc_data["ExpiryDate"] = @@date_converter.convert_to_date(mrz_line_2[21...27])
+    doc_data["PersonalNumber"] = mrz_line_2[28...42].sub(/<+/, '')
 
     #mrz given check digits
     doc_check = Array.new
@@ -64,3 +65,18 @@ class Check::CheckDigit
     return (values.zip([7,3,1].cycle).map{|(v,w)| v * w}.reduce(:+) % 10).to_s
   end
 end
+
+class Check::YYDate
+  def convert_to_date(input_date)
+  	#yymmdd has the flaw of not knowing which century
+  	#uses current year as a cut off to make an accurate prediction
+    current_year_yy = (Date.today.strftime("%Y"))[2..4]
+    input_year_yy = input_date[0..1]
+    input_month = input_date[2..3]
+    input_day = input_date[4..5]
+    return Date.parse(input_day+"-"+input_month+"-"+"19"+input_year_yy) if input_year_yy >= current_year_yy
+    return Date.parse(input_day+"-"+input_month+"-"+"20"+input_year_yy)
+  end
+end
+
+require 'date'

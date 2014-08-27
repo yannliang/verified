@@ -37,10 +37,10 @@ LastName : Last name on the passport
 FirstNames : Array of first names on the passport (First and any middle names)
 Number : Passport Number
 Nationality : Nationality of the person on the passport. Different from the issuing state (eg. Swedish person who is also a citizen of UK.)
-DateOfBirth : Date of Birth, given in format YYMMDD
-Gender : Gender, given as M, F or < if not specified
-ExpiryDate : Expiy date of the passport, given in format YYMMDD
-PersonalNumber : Personal number, if chosen to be given by issuer. If nothing is given returns 14 <'s
+DateOfBirth : Date of Birth, given as a Ruby Date object.
+Gender : Gender, given as M, F or nil if not specified.
+ExpiryDate : Expiy date of the passport, given as a Ruby Date object.
+PersonalNumber : Personal number, if chosen to be given by issuer. Nil if not specified.
 ```
 ## Installation
 Verified is installed as a ruby gem
