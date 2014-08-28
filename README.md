@@ -52,7 +52,7 @@ gem install verified
 Or add it to your project Gemfile
 
 ```ruby
-gem "verified", "~> 1.0.0"
+gem "verified", "~> 1.1.0"
 ```
 
 ## License and Credit
