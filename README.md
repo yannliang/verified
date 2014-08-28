@@ -55,8 +55,11 @@ Or add it to your project Gemfile
 gem "verified", "~> 1.0.0"
 ```
 
-## License
+## License and Credit
 Released under the MIT license for free usage with no warranty.
+
+Based on Document 9303 (Machine Readable Travel Documents - Part 1 - Machine Readable Passports. Volume 1 - Passports with Machine Readable Data Stored in Optical Character Recognition format) by the ICAO which can be found here:
+http://www.icao.int/publications/pages/publication.aspx?docnum=9303
 
 WARNING: THE ALGORITHM TO GENERATE VALID CHECK DIGITS ON MRZ'S IS PUBLIC.
 BY USING VERIFIED YOU UNDERSTAND THIS CANNOT CONFIRM THE VALID ISSUE OF A PASSPORT,
